@@ -1,33 +1,49 @@
-"use client"
+"use client";
 
-import type React from "react"
+import { supabase } from "@/lib/supabase";
+import type React from "react";
 
-import { useState } from "react"
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // This would normally submit to a backend
-    console.log("Form submitted:", formData)
-    alert("Thanks for reaching out! This is a demo form.")
-    setFormData({ name: "", email: "", message: "" })
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { data, error } = await supabase
+      .from("get_in_touch_user")
+      .insert([formData]);
+
+    if (error) {
+      console.error("Error saving to Supabase:", error.message);
+      toast.error("Something went wrong. Please try again.");
+      return;
+    }
+
+    console.log("Form submitted:", data);
+    toast.success("Thanks for reaching out! Your message was saved.");
+    setFormData({ name: "", email: "", message: "" });
+  };
 
   return (
     <section id="contact" className="container mx-auto px-4 py-16 md:py-24">
       <div className="max-w-[600px] mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-[#946DF0] mb-8 text-center">Get in touch</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-[#946DF0] mb-8 text-center">
+          Get in touch
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -84,5 +100,5 @@ export default function ContactForm() {
         </form>
       </div>
     </section>
-  )
+  );
 }
