@@ -10,6 +10,7 @@ import BottomSection from "@/components/bottom-section"
 import ContactForm from "@/components/contact-form"
 import CursorGlow from "@/components/cursor-glow"
 import { useRef } from "react"
+import Footer from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -44,6 +45,7 @@ export default function Home() {
           <div ref={contactRef}>
             <ContactForm />
           </div>
+          <Footer/>
         </div>
       )}
     </main>
