@@ -26,7 +26,7 @@ export default function Footer() {
         className="flex flex-col md:flex-row justify-between items-center"
       >
         <div className="text-gray-400 text-sm mb-4 md:mb-0">
-          &copy; {new Date().getFullYear()} Krip.ai, All rights reserved
+          &copy; {new Date().getFullYear()} Alumna.ai, All rights reserved
         </div>
         <div className="flex space-x-6">
           {socialIcons.map((social, index) => (
