@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 6, 6, 6;
+  --background-end-rgb: 6, 6, 6;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  overflow-x: hidden;
+}
+
+.animation-delay-150 {
+  animation-delay: 150ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+/* Gradient Background */
+.bg-gradient-background {
+  background-color: #060606;
+  background-image: radial-gradient(circle at 20% 30%, rgba(140, 103, 226, 0.15) 0%, transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(232, 125, 179, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 50% 70%, rgba(255, 200, 153, 0.08) 0%, transparent 30%);
+  position: relative;
+}
+
+.gradient-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(217deg, rgba(140, 103, 226, 0.03), rgba(0, 0, 0, 0) 70%),
+    linear-gradient(127deg, rgba(232, 125, 179, 0.03), rgba(0, 0, 0, 0) 70%),
+    linear-gradient(336deg, rgba(255, 200, 153, 0.03), rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Feature Card Animations */
+.feature-card {
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: float 6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.feature-card-visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation-play-state: running;
+}
+
+/* Staggered animation delay for cards */
+.feature-card:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.feature-card:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.feature-card:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+.feature-card:nth-child(5) {
+  animation-delay: 2s;
+}
+
+.feature-card:nth-child(6) {
+  animation-delay: 2.5s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Cursor glow effect */
+.cursor-glow {
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s forwards;
+}
