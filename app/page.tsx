@@ -7,16 +7,16 @@ import Header from "@/components/header"
 import WhatAlumnaDoes from "@/components/what-alumna-does"
 import SolutionFeatures from "@/components/solution-features"
 import BottomSection from "@/components/bottom-section"
-import ContactForm from "@/components/contact-form"
+import ComingSoon from "@/components/coming-soon"
+import WaitlistModal from "@/components/waitlist-modal"
 import CursorGlow from "@/components/cursor-glow"
-import { useRef } from "react"
 import Footer from "@/components/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export default function Home() {
   const [loading, setLoading] = useState(true)
-  const contactRef = useRef<HTMLDivElement>(null)
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false)
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,25 +26,27 @@ export default function Home() {
     return () => clearTimeout(timer)
   }, [])
 
-  const scrollToContact = () => {
-    contactRef.current?.scrollIntoView({ behavior: "smooth" })
+  const openWaitlist = () => {
+    setIsWaitlistOpen(true)
+  }
+
+  const closeWaitlist = () => {
+    setIsWaitlistOpen(false)
   }
 
   return (
-    <main className={`min-h-screen bg-gradient-background text-white ${inter.className}`}>
-      <CursorGlow />
+    <main className={`min-h-screen bg-[#060606] text-white ${inter.className}`}>
+      <CursorGlow/>
       {loading ? (
         <Loader />
       ) : (
         <div className="flex flex-col">
-          <div className="gradient-overlay"></div>
-          <Header onContactClick={scrollToContact} />
+          <Header onContactClick={openWaitlist} />
           <WhatAlumnaDoes />
+          <ComingSoon />
           <SolutionFeatures />
-          <BottomSection onContactClick={scrollToContact} />
-          <div ref={contactRef}>
-            <ContactForm />
-          </div>
+          <BottomSection />
+          <WaitlistModal isOpen={isWaitlistOpen} onClose={closeWaitlist} />
           <Footer/>
         </div>
       )}
