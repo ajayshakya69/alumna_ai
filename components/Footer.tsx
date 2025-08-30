@@ -25,7 +25,11 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className="container mx-auto px-4 py-8 mt-auto z-10">
+    <footer className="container mx-auto px-4 py-8 mt-auto z-10 ">
+      <p className="text-center mb-16 text-gray-400">
+        114, 1st Floor, 43-A, Iksana Workspaces, IT Park, Sahastradhara Road,
+        Dehradun, Uttarakhand, 248001
+      </p>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
